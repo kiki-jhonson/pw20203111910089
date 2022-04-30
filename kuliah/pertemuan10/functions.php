@@ -22,4 +22,25 @@ function query($query){
   return $rows;
 }
 
+function tambah($data)
+{
+  $conn = koneksi();
+
+$nama = htmlspesialchars($data['nama']);
+$nis = htmlspesialchars($data['nis']);
+$email = htmlspesialchar($data['email']);
+$kelas = htmlspesialchars($data['kelas']);
+$gambar = htmlspesialchars($data['gambar']);
+
+  $query = "INSERT INTO
+            santri
+            VALUES
+            (null,'$nama','$nis', '$email','$kelas','$gambar');
+             ";
+mysqli_query($conn, $query);
+
+echo mysqli_errno($conn);
+return mysqli_affected_rows($conn);
+}
+
 ?>
