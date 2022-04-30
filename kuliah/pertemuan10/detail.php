@@ -1,0 +1,32 @@
+<?php 
+require 'functions.php';
+
+// ambil id dari URL
+$id = $_GET['id'];
+
+// query santri berdasarkan id
+$santri = query("SELECT * FROM santri WHERE id = $id");
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Mahasiswa</title>
+</head>
+<body>
+  <h3>Detail Mahasiswa</h3>
+  <ul>
+    <li><img src="img/<?= $santri['gambar']; ?>" width="50"></li>
+    <li>Nama : <?= $santri['nama']; ?></li>
+    <li>Nis :  <?= $santri['nis']; ?></li>
+    <li>Email : <?= $santri['email']; ?></li>
+    <li>Kelas : <?= $santri['kelas']; ?></li>
+    <li> <a href="">ubah</a></li>
+    <li><a href="index2.php">kembali ke halaman selanjutnya</a></li>
+  </ul>
+</body>
+</html>
