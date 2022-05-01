@@ -23,43 +23,48 @@ function query($query){
 }
 
 function tambah($data)
-{
+{ 
   $conn = koneksi();
 
-$nama = htmlspesialchars($data['nama']);
-$nis = htmlspesialchars($data['nis']);
-$email = htmlspesialchar($data['email']);
-$kelas = htmlspesialchars($data['kelas']);
-$gambar = htmlspesialchars($data['gambar']);
+$nama = htmlspecialchars($data['nama']);
+$nis = htmlspecialchars($data['nis']);
+$email = htmlspecialchars($data['email']);
+$kelas = htmlspecialchars($data['kelas']);
+$gambar = htmlspecialchars($data['gambar']);
 
   $query = "INSERT INTO
             santri
             VALUES
             (null,'$nama','$nis', '$email','$kelas','$gambar');
              ";
-mysqli_query($conn, $query);
+mysqli_query($conn, $query) or die(mysqli_error($conn));
 
-echo mysqli_error($conn);
+echo mysqli_error($conn); 
 return mysqli_affected_rows($conn);
 }
+
+
 
 function hapus($id)
 {
 $conn =  koneksi();
-mysqli_query($conn, "DELETE FROM santri WHERE id = $id") or die(mysqli_errno($conn)); 
+mysqli_query($conn, "DELETE FROM santri WHERE id = $id") or die(mysqli_error($conn)); 
 return mysqli_affected_rows($conn);
 
 }
+
+
+
 function ubah($data)
 {
   $conn = koneksi();
 
   $id = $data['id'];
-$nama = htmlspesialchars($data['nama']);
-$nis = htmlspesialchars($data['nis']);
-$email = htmlspesialchar($data['email']);
-$kelas = htmlspesialchars($data['kelas']);
-$gambar = htmlspesialchars($data['gambar']);
+$nama = htmlspecialchars($data['nama']);
+$nis = htmlspecialchars($data['nis']);
+$email = htmlspecialchars($data['email']);
+$kelas = htmlspecialchars($data['kelas']);
+$gambar = htmlspecialchars($data['gambar']);
 
   $query = "UPDATE santri SET 
           nama= '$nama';
@@ -67,32 +72,31 @@ $gambar = htmlspesialchars($data['gambar']);
           email= '$email';
           kelas= '$kelas';
           gambar= '$gambar';
-          WHERE id = $id;
-          ";
-mysqli_query($conn, $query);
+          WHERE id = '$id";
 
-echo mysqli_error($conn);
-return mysqli_affected_rows($conn);
+// mysqli_query($conn, $query) or die(mysqli_error($conn));
+ echo mysqli_error($conn); 
+ return mysqli_affected_rows($conn);
 }
 
 
 function cari($keyword){
 $conn = koneksi();
-
-$query = "SELECT  * FROM santri
+ 
+$query = "SELECT * FROM santri
           WHERE 
-          nama LIKE '%keyword%' OR
-          nis LIKE '%keyword%' OR
-          email LIKE '%keyword%' OR
-          kelas LIKE '%keyword%' OR
-          gambar LIKE '%keyword%' OR
-          ";
-$result = mysqli_query($conn, $query);
-$rows = [];
-while ($row = mysqli_fetch_assoc($result)){
-$rows[] = $row;
+          nama LIKE '%$keyword%' OR
+          nis LIKE '%$keyword%' OR
+          email LIKE '%$keyword%' OR
+          kelas LIKE '%$keyword%' OR
+          gambar LIKE '%$keyword%' OR
+          "; 
+  $result = mysqli_query($conn, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)){
+  $rows[] = $row;
 
 }
-return $rows;
+  return $rows;
 }
 ?>

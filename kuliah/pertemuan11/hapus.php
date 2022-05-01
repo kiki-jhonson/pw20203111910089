@@ -6,6 +6,8 @@ require 'functions.php';
 //   header("location : index.php");
 //   exit;
 // }
+
+
 // mengambil id dari URL
 $id = $_GET['id'];
 
@@ -15,7 +17,10 @@ echo  "<script>
         document.location.href = 'index.php';
       </script>";
  }else {
-   echo "data gagal Dihapus"; 
+   echo "<script>
+   alert('data gagal dihapus');
+   document.location.href = 'index.php';
+ </script>";
  }
 
 ?>

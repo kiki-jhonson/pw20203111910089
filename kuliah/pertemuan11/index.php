@@ -4,10 +4,10 @@
 require "functions.php";
 
 // tampung ke variabel mahasiswa 
-$mahasiswa = query("SELECT * FROM santri");
+$mahasiswa = query("SELECT * FROM santri ORDER BY id DESC");
 
 //ketika tombol cari di klik
-if (isset($_POST['CARI'])) {
+if (isset($_POST['cari'])) {
   $mahasiswa = cari($_POST['keyword']);
 }
 
@@ -30,7 +30,7 @@ if (isset($_POST['CARI'])) {
 
 <form action="" method="POST">
 <input type="text" name="keyword" size="30" placeholder="masukan pencarian" autocomplete="off" autofocus>
-<button type="submit" name="cari">cari !</button>
+<button type="submit" name="cari">search</button>
 
 </form>
 <br><br>
@@ -45,7 +45,6 @@ if (isset($_POST['CARI'])) {
 
 
 <?php if(empty($mahasiswa)) : ?>
-
 <tr>
 <td colspan="4">
   <p style="color: red; font-style:italic;">data mahasiswa tidak di temukan</p>
@@ -56,13 +55,13 @@ if (isset($_POST['CARI'])) {
 
 
 <?php $i = 1;
- foreach($mahasiswa as $m): ?>
+ foreach($mahasiswa as $santri): ?>
 <tr>
   <td><?= $i++; ?></td>
-  <td><img src="img/<?= $m['gambar']; ?>" width="50"></td>
-  <td><?= $m['nama']; ?></td>
+  <td><img src="img/<?= $santri['gambar']; ?>" width="50"></td>
+  <td><?= $santri['nama']; ?></td>
 <td>
-   <a href="detail.php?id=<?= $m['id']; ?>">Lihat Detail</a>
+   <a href="detail.php?id=<?= $santri['id']; ?>">Lihat Detail</a>
 
 </td>
 </tr>

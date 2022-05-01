@@ -26,7 +26,7 @@ require 'functions.php';
 <body>
   <h3>Form Data Santri</h3>
 
-<form action="" method="POST"></form>
+<form action="" method="POST">
 <ul>
   <li>
     <label>
@@ -37,32 +37,32 @@ require 'functions.php';
   <li>
     <label>
       nis :
-      <input type="text" name="nis">
+      <input type="text" name="nis" required>
     </label>  
   </li>
   <li>
     <label>
       email :
-      <input type="text" name="email">
+      <input type="text" name="email" required>
     </label>      
   </li>
   <li>
     <label>
       kelas : 
-      <input type="text" name="kelas">
+      <input type="text" name="kelas" required>
     </label>
   </li>
   <li>
     <label>
       gambar
-      <input type="text" name="gambar">
+      <input type="text" name="gambar" required>
     </label>
   </li>
   <li>
   <button type="submit" name="tambah"> tambah</button>
   </li>
 </ul>
-
+</form>
 <a href="index.php">kembali kehalaman selanjutnya</a>
 </body>
 </html>
