@@ -24,22 +24,24 @@ function query($query){
 
 function tambah($data)
 {
-  $conn = koneksi();
+var_dump($data);
+$conn = koneksi();
 
-$nama = htmlspesialchars($data['nama']);
-$nis = htmlspesialchars($data['nis']);
+
+$nama = htmlspesialchar($data['nama']);
+$nis = htmlspesialchar($data['nis']);
 $email = htmlspesialchar($data['email']);
-$kelas = htmlspesialchars($data['kelas']);
-$gambar = htmlspesialchars($data['gambar']);
+$kelas = htmlspesialchar($data['kelas']);
+$gambar = htmlspesialchar($data['gambar']);
 
-  $query = "INSERT INTO
+$query = "INSERT INTO
             santri
-            VALUES
-            (null,'$nama','$nis', '$email','$kelas','$gambar');
-             ";
-mysqli_query($conn, $query);
+        VALUES
+        (NULL,'$nama', '$nis', '$email', '$kelas','$gambar');
+";
 
-echo mysqli_errno($conn);
+mysqli_query($conn,$query);
+
 return mysqli_affected_rows($conn);
 }
 
