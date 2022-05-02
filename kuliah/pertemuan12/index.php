@@ -1,5 +1,11 @@
 <?php 
 
+session_start();
+// cek sessionnya, apakah sudah login atau blum
+if (!isset($_SESSION['login'])) {
+  header("location: login.php");
+  exit;
+}
 
 require "functions.php";
 
@@ -23,6 +29,9 @@ if (isset($_POST['cari'])) {
   <title>Daftar Mahasiswa</title>
 </head>
 <body>
+  
+<a href="logout.php">logout</a>
+
   <h3>Daftar Mahasiswa</h3>
 <a href="tambah.php">Tambah data Mahasiswa</a>
 <br><br>

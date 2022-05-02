@@ -102,4 +102,93 @@ $query = "SELECT * FROM santri
 }
   return $rows;
 }
+
+function login($data)
+{
+$conn = koneksi();
+
+$username = htmlspecialchars($data['username']);
+$password = htmlspecialchars($data['password']);
+
+if (query("SELECT * FROM user WHERE username = '$username' && password = '$password'")) {
+  // set session dlu
+ $_SESSION['login'] = true;
+
+  header("location: index.php");
+  exit;
+} else {
+  return [
+    'error' => true,
+    'pesan' => 'username atau pasword salah'
+ ];
+} 
+
+}
+
+function registrasi($data)
+{
+$conn = koneksi();
+
+$username = htmlspecialchars(strtolower($data['username']));
+$password1 = mysqli_real_escape_string($conn,$data['password1']);
+$password2 = mysqli_real_escape_string($conn,$data['password2']);
+
+//jika username atau password kosong
+if (empty($username) || empty($password1) || empty($password2)) {
+  echo"<script>
+      alert('username / password tidak boleh kosong');
+      document.location.href = 'registrasi.php';
+      </script>";
+
+return false;
+
+  } 
+
+// jika username sudah ada
+if (query("SELECT * FROM user WHERE username = '$username'")) {
+  echo"<script>
+      alert('username sudah terdaftar');
+      document.location.href = 'registrasi.php';
+      </script>";
+return false;
+}
+
+
+  //jika konfirmasi password tidak sesuai
+  if ($password1 !== $password2){
+    echo"<script>
+        alert('password tidak sesuai');
+        document.location.href='registrasi.php';
+        </script>";
+
+return false;
+  }
+
+  
+// jika password < 5 digit
+if (strlen($password1) < 5){
+  echo"<script>
+        alert('password tidak sesuai');
+        document.location.href='registrasi.php';
+        </script>";
+  
+  return false;
+}
+
+
+// jika username & password sudah sesuai
+// enrkripsi password
+$passwor_baru = password_hash($password1, PASSWORD_DEFAULT);
+// insert ke table user
+
+$query = "INSERT INTO user
+          VALUES 
+          (null,'$username', '$password_baru')
+          ";
+  mysqli_query($conn,$query) or die (mysqli_error($conn));
+  return mysqli_affected_rows($conn);
+
+}
+
+
 ?>
